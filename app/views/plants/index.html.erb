@@ -1,0 +1,13 @@
+<h1>Plants</h1>
+<div class="container">
+  <div class="plant-list">
+    <% @plants.each do |p| %>
+      <div class="card">
+        <p class="card-text"><%= p.name %></p>
+      </div>
+    <% end %>
+  </div>
+  <%= link_to "new plant", new_plant_path %>
+</div>
+
+

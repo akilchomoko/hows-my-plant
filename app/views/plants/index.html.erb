@@ -3,7 +3,11 @@
   <div class="plant-list">
     <% @plants.each do |p| %>
       <div class="card">
-        <p class="card-text"><%= p.name %></p>
+        <p class="card-text">
+          <%= p.name %>
+          <%= link_to icon("fas", "info-circle"), plant_path(p) %>
+          <%= link_to icon("fas", "trash-alt"), plant_path(p), method: :delete %>
+        </p>
       </div>
     <% end %>
   </div>

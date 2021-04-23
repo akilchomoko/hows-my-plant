@@ -3,7 +3,8 @@ class PlantsController < ApplicationController
   before_action :set_plant, only: [:edit, :show, :destroy, :update]
 
   def index
-    @plants = Plant.all
+    # @plants = Plant.all
+    @plants = policy_scope(Plant).order(created_at: :desc)
   end
 
   def show; end

@@ -25,6 +25,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
 gem 'simple_form'
 gem 'font-awesome-sass'
+gem 'pundit'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

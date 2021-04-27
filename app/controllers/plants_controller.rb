@@ -4,6 +4,7 @@ class PlantsController < ApplicationController
 
   def index
     # @plants = Plant.all
+    # Understand what this means for next time
     @plants = policy_scope(Plant).order(created_at: :desc)
   end
 

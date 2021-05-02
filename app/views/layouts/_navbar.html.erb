@@ -13,7 +13,8 @@
 
         <li class="nav-time bg-background" style="margin-right: 20px"></li>
         <li class="nav-item"><%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link btn btn-primary text-white rounded-pill" %></li>
-        <li class="nav-item" style="color: black"> <%= current_user.email %></li>
+        <li class="nav-item" style="color: black"> <%= current_user.firstname %></li>
+        <li class="nav-item"><%= link_to "Account", edit_user_registration_path(current_user), class: "nav-link btn btn-primary text-white rounded-pill" %></li>
         <li class="nav-item dropdown bg-background">
           <%= image_tag image_path("mullet.jpg"), class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <div class="dropdown-background dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

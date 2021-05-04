@@ -4,17 +4,29 @@ class PlantPolicy < ApplicationPolicy
       # scope.all
       user.admin? ? scope.all : scope.where(user: user)
     end
+  end
 
-    def index?
-      return true
-    end
+  def new?
+    true
+  end
 
-    def new?
-      return true
-    end
+  def create?
+    true
+  end
 
-    def create?
-      return true
-    end
+  def show?
+    user.admin? || record.user == user
+  end
+
+  def edit?
+    user.admin? || record.user == user
+  end
+
+  def update?
+    user.admin? || record.user == user
+  end
+
+  def destroy?
+    user.admin? || record.user == user
   end
 end

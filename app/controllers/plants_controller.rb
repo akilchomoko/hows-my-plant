@@ -8,7 +8,9 @@ class PlantsController < ApplicationController
     @plants = policy_scope(Plant).order(created_at: :desc)
   end
 
-  def show; end
+  def show
+    authorize @plant
+  end
 
   def new
     @plant = Plant.new
@@ -24,14 +26,18 @@ class PlantsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    authorize @plant
+  end
 
   def update
+    authorize @plant
     @plant.update(params_plant)
     @plant.save
   end
 
   def destroy
+    authorize @plant
     @plant.delete
     redirect_to plants_path
   end

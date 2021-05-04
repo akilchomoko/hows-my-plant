@@ -17,6 +17,13 @@ class ApplicationController < ActionController::Base
     redirect_to(root_path)
   end
 
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  def record_not_found
+    flash[:notice] = "No record found"
+    redirect_to(root_path)
+  end
+
+
   protected
 
   def skip_pundit?

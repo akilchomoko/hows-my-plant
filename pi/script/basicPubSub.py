@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 '''
 /*
  * Copyright 2010-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
@@ -17,25 +16,12 @@
  '''
 
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
-import ADC0832
-import math
 import logging
 import time
 import argparse
 import json
 
 AllowedActions = ['both', 'publish', 'subscribe']
-
-def init():
-    ADC0832.setup()
-
-def sensorData():
-        analogVal = ADC0832.getResult()
-        Vr = 5 * float(analogVal) / 255
-        Rt = 10000 * Vr / (5 - Vr)
-        temp = 1/(((math.log(Rt / 10000)) / 3950) + (1 / (273.15+25)))
-        temp = temp - 273.15
-        return temp
 
 # Custom MQTT message callback
 def customCallback(client, userdata, message):
@@ -57,10 +43,10 @@ parser.add_argument("-w", "--websocket", action="store_true", dest="useWebsocket
                     help="Use MQTT over WebSocket")
 parser.add_argument("-id", "--clientId", action="store", dest="clientId", default="basicPubSub",
                     help="Targeted client id")
-parser.add_argument("-t", "--topic", action="store", dest="topic", default="pi/data/temp", help="Targeted topic")
+parser.add_argument("-t", "--topic", action="store", dest="topic", default="sdk/test/Python", help="Targeted topic")
 parser.add_argument("-m", "--mode", action="store", dest="mode", default="both",
                     help="Operation modes: %s"%str(AllowedActions))
-parser.add_argument("-M", "--message", action="store", dest="message", default="Hello World!",
+parser.add_argument("-M", "--message", action="store", dest="message", default="Hello Akil!",
                     help="Message to publish")
 
 args = parser.parse_args()
@@ -125,20 +111,14 @@ time.sleep(2)
 
 # Publish to the same topic in a loop forever
 loopCount = 0
-if __name__ == '__main__':
-    init()
-    try:
-        while True:
-            if args.mode == 'both' or args.mode == 'publish':
-                message = {}
-                message['message'] = sensorData()
-                message['sequence'] = loopCount
-                messageJson = json.dumps(message)
-                myAWSIoTMQTTClient.publish(topic, messageJson, 1)
-                if args.mode == 'publish':
-                    print('Published topic %s: %s\n' % (topic, messageJson))
-                loopCount += 1
-            time.sleep(1)
-    except KeyboardInterrupt:
-        ADC0832.destroy()
-        print 'The end !'
+while True:
+    if args.mode == 'both' or args.mode == 'publish':
+        message = {}
+        message['message'] = args.message
+        message['sequence'] = loopCount
+        messageJson = json.dumps(message)
+        myAWSIoTMQTTClient.publish(topic, messageJson, 1)
+        if args.mode == 'publish':
+            print('Published topic %s: %s\n' % (topic, messageJson))
+        loopCount += 1
+    time.sleep(1)

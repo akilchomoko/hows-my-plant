@@ -26,6 +26,7 @@ gem 'devise'
 gem 'simple_form'
 gem 'font-awesome-sass'
 gem 'pundit'
+gem 'bootstrap', '~> 5.0.0'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

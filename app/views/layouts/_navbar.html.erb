@@ -1,20 +1,20 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+<div class="navbar navbar-expand-sm navbar-dark navbar-lewagon">
   <div class="navbar">
     <%= link_to icon("fas", "home"), root_path, class: "navbar-brand" %>
 
   </div>
 
   <div class="navbar" id="navbarSupportedContent">
-    <ul class="navbar-nav">
+    <ul class="nav nav-pills">
       <li class="mr-3 nav-item">
-
+        No
       </li>
       <% if user_signed_in? %>
 
         <li class="nav-time bg-background" style="margin-right: 20px"></li>
-        <li class="nav-item"><%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link btn btn-primary text-white rounded-pill" %></li>
+        <li class="nav-item"><%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link btn btn-primary text-white" %></li>
         <li class="nav-item" style="color: black"> <%= current_user.firstname %></li>
-        <li class="nav-item"><%= link_to "Account", edit_user_registration_path(current_user), class: "nav-link btn btn-primary text-white rounded-pill" %></li>
+        <li class="nav-item"><%= link_to "Account", edit_user_registration_path(current_user), class: "nav-link btn btn-primary text-white" %></li>
         <li class="nav-item dropdown bg-background">
           <%= image_tag image_path("mullet.jpg"), class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <div class="dropdown-background dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
